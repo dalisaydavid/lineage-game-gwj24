@@ -10,6 +10,7 @@ var colors = [
 const HIT_BOTTOM_COLOR = Color.darkred
 
 var has_hit_bottom = false
+var is_highlighted = false
 
 func _ready():
 	randomize()
@@ -55,3 +56,18 @@ func delete():
 
 func _on_DeleteTween_tween_all_completed():
 	queue_free()
+
+func highlight(on):
+	if on and not has_hit_bottom:
+		$Sprite.modulate.a = 0.5
+	else:
+		$Sprite.modulate.a = 1.0
+
+func _on_Area2D_area_exited(area):
+	if area.is_in_group('chooser'):
+		highlight(false)
+
+
+func _on_Area2D_area_entered(area):
+	if area.is_in_group('chooser'):
+		highlight(true)

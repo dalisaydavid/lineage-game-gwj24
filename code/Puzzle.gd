@@ -4,7 +4,7 @@ var width = 4
 var height = 5
 var blocks = []
 var block_scene = load("res://Block.tscn")
-
+var block_chooser = null;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#add_block(0,0)
@@ -90,7 +90,7 @@ func delete_block(block):
 	block.delete()
 
 func find_matches():
-	var matching_blocks = []
+	var matching_blocks = {}
 	for block in blocks:
 		if not block.has_hit_bottom:
 			continue
@@ -107,12 +107,20 @@ func find_matches():
 			
 			if block.get_color() == other_block.get_color():
 				if not block in matching_blocks:
-					matching_blocks.append(block)
-				if not other_block in matching_blocks:
-					matching_blocks.append(other_block)
+					matching_blocks[block] = [other_block]
+				else:
+					if not other_block in matching_blocks[block]:
+						matching_blocks[block].append(other_block)
 	
+	# For every color-matching block...
+	# Look to see if there's 3 or more attached.
+	# If there are, than delete them all. Otherwise, don't delete them.
 	for block in matching_blocks:
-		delete_block(block)
+		var touching_blocks = matching_blocks[block]
+		if touching_blocks.size() > 1:
+			for touching_block in touching_blocks:
+				delete_block(touching_block)
+			delete_block(block)
 		
 
 func _on_TickTimer_timeout():
