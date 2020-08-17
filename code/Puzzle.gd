@@ -1,7 +1,7 @@
 extends Node2D
 
 var width = 4
-var height = 5
+var height = 7
 var blocks = []
 var block_scene = load("res://Block.tscn")
 var block_chooser = null;
@@ -29,12 +29,16 @@ func _ready():
 #	add_block(3,2)
 #	add_block(4,2)
 	
-	$TickTimer.start()
+	setup_puzzle()
 
 func setup_puzzle(number_of_blocks=20):
 	for i in range(number_of_blocks):
 		var random_block = add_random_block()
-		drop_block(random_block)
+		if can_block_move(random_block):
+			drop_block(random_block)
+
+	$TickTimer.start()
+	$SpawnTimer.start()
 
 func init(x, y):
 	width = x
@@ -71,9 +75,9 @@ func is_position_occupied(x, y):
 
 func add_block(x, y, color=Color.greenyellow):
 	# At position (0,0), block should be drawn at pixel (64,64)
-	if is_position_occupied(x, y):
-		print('position ', Vector2(x,y), ' is occupied. Cannot add block.')
-		return
+#	if is_position_occupied(x, y):
+#		print('position ', Vector2(x,y), ' is occupied. Cannot add block.')
+#		return
 		
 	var block = block_scene.instance()
 	
@@ -277,15 +281,26 @@ func print_block_names():
 	print('####             ####')
 
 func _on_TickTimer_timeout():
+	sort_blocks(blocks)
 	
+	for block in blocks:
+		if can_block_move(block) and block.has_hit_bottom:
+			drop_block(block)
 
 	find_matches()
 
 func _on_DropTimer_timeout():
 	sort_blocks(blocks)
-	
-	for block in blocks:
-		if can_block_move(block):
-			drop_block(block)
 
+	for block in blocks:
+		if can_block_move(block) and not block.has_hit_bottom:
+			drop_block(block)
+	
+	$SpawnTimer.start()
+	$DropTimer.stop()
+
+
+func _on_SpawnTimer_timeout():
 	add_random_block()
+	$SpawnTimer.stop()
+	$DropTimer.start()
