@@ -1,10 +1,14 @@
 extends Node2D
 
 var colors = [
-	Color.blanchedalmond,
-	Color.chocolate,
-	Color.darkseagreen,
-	Color.darksalmon
+	Color.green,
+	Color.blue,
+	Color.red,
+	Color.orange,
+	Color.purple,
+	Color.pink,
+	Color.white,
+	Color.yellow
 ]
 
 const HIT_BOTTOM_COLOR = Color.darkred
@@ -18,6 +22,13 @@ func _ready():
 
 func get_color():
 	return $Sprite.modulate
+	
+func set_color(color):
+	if color == 'random':
+		randomize()
+		$Sprite.modulate = colors[randi() % colors.size()]
+	else:
+		$Sprite.modulate = color
 	
 func hit_bottom(b):
 	has_hit_bottom = b
@@ -39,6 +50,9 @@ func is_touching(other_block, pixel_difference=128):
 		return true
 		
 	return false
+	
+func is_diagonal(other_block, pixel_difference=128):
+	return abs(self.global_position.y  - other_block.global_position.y) == pixel_difference and abs(self.global_position.x - other_block.global_position.x) == pixel_difference
 
 func delete():
 	var tween = get_node('DeleteTween')
