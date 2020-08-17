@@ -7,6 +7,8 @@ var token_index_bag = []
 var revealed_text_as_tokens = []
 var puzzle = null
 var chain_required_for_word = 10
+var total_blocks_deleted_required_for_word = 30
+var blocks_deleted_since_last_word = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,12 +20,16 @@ func _ready():
 		revealed_text_as_tokens.append(" ")
 	
 	puzzle = get_parent().get_node('Puzzle')
+	puzzle.connect('delete_block', self, 'count_deleted_blocks')
 	puzzle.connect('delete_block', self, 'update_story_label')
 
 func is_text_fully_revealed():
 	var text_so_far = PoolStringArray(revealed_text_as_tokens).join(" ")
 	return text_so_far == final_text
 
+func count_deleted_blocks():
+	blocks_deleted_since_last_word += 1
+	
 func reveal_word():
 	if is_text_fully_revealed():
 		return

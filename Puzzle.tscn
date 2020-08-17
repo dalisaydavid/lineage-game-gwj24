@@ -9,11 +9,12 @@ script = ExtResource( 2 )
 wait_time = 0.45
 
 [node name="DropTimer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="SpawnTimer" type="Timer" parent="."]
 
 [node name="ChainTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 autostart = true
 [connection signal="timeout" from="TickTimer" to="." method="_on_TickTimer_timeout"]
 [connection signal="timeout" from="DropTimer" to="." method="_on_DropTimer_timeout"]
