@@ -1,18 +1,27 @@
 extends Node2D
 
+#var colors = [
+#	Color.green,
+#	Color.blue,
+#	Color.red,
+#	Color.orange,
+#	Color.purple,
+#	Color.white
+#]
+
+# https://coolors.co/540d6e-ee4266-ffd23f-3bceac-0ead69
 var colors = [
-	Color.green,
-	Color.blue,
-	Color.red,
-	Color.orange,
-	Color.purple,
-	Color.pink,
-	Color.white,
-	Color.yellow
+	Color('540d6e'),
+	Color('ee4266'),
+	Color('ffd23f'),
+	Color('3bceac'),
+	Color('0ead69')
 ]
+
 
 const HIT_BOTTOM_COLOR = Color.darkred
 
+var points_reward = 5
 var has_hit_bottom = false
 var is_highlighted = false
 
@@ -24,7 +33,7 @@ func get_color():
 	return $Sprite.modulate
 	
 func set_color(color):
-	if color == 'random':
+	if color == Color(-1,-1,-1,-1):
 		randomize()
 		$Sprite.modulate = colors[randi() % colors.size()]
 	else:
@@ -61,11 +70,13 @@ func delete():
 		'scale',
 		Vector2(1, 1), 
 		Vector2(1.15, 1.15), 
-		0.2,
+		0.45,
 		Tween.TRANS_QUART, 
 		Tween.EASE_OUT
 	)
 	tween.start()
+	
+	return points_reward
 
 
 func _on_DeleteTween_tween_all_completed():

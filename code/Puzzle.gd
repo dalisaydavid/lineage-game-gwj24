@@ -1,14 +1,20 @@
 extends Node2D
 
-var width = 4
+signal update_points
+signal delete_block
+
+var points = 5
+var width = 5
 var height = 7
 var blocks = []
 var block_scene = load("res://Block.tscn")
-var block_chooser = null;
-const NUM_SETUP_BLOCKS = 20;
-var setup_blocks = 0;
+var block_chooser = null
+const NUM_SETUP_BLOCKS = 20
+var setup_blocks = 0
+var current_chain = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_process_input(true)
 	# Green vertical column.
 #	add_block(0,0)
 #	add_block(0,1)
@@ -28,7 +34,7 @@ func _ready():
 #	# Blue-violet horizontal row.
 #	add_block(3,2)
 #	add_block(4,2)
-	
+
 	setup_puzzle()
 
 func setup_puzzle(number_of_blocks=20):
@@ -40,6 +46,10 @@ func setup_puzzle(number_of_blocks=20):
 	$TickTimer.start()
 	$SpawnTimer.start()
 
+func _input(event):
+	if event.is_action_released('new_row'):
+		add_row_from_bottom()
+		
 func init(x, y):
 	width = x
 	height = y
@@ -51,7 +61,7 @@ func init(x, y):
 #		grid.append(row)
 
 func grid_position_to_pixel(x, y):
-	return Vector2((x * 128) + 64, (x * 128) + 64)
+	return Vector2((x * 128) + 64, (y * 128) + 64)
 	
 func pixel_to_grid_position(x_pixel, y_pixel):
 	return Vector2((x_pixel - 64) / 128, (y_pixel - 64) / 128)
@@ -63,13 +73,14 @@ func _process(delta):
 func add_random_block():
 	randomize()
 	
-	return add_block(randi() % (width+1), 0, 'random')
+	return add_block(randi() % width, 0, Color(-1,-1,-1,-1))
 
 func is_position_occupied(x, y):
 	for block in blocks:
 		var pixel_position = grid_position_to_pixel(x, y)
 		if block.global_position == pixel_position:
 			return true
+			
 			
 	return false
 
@@ -123,7 +134,18 @@ func drop_block(block, pixel_difference=128):
 	
 func delete_block(block):
 	blocks.remove(blocks.find(block))
-	block.delete()
+	var points_reward = block.delete()
+	update_points(points_reward)
+	emit_signal('delete_block')
+	
+	if not $ChainTimer.is_stopped():
+		$ChainTimer.start()
+		current_chain += 1
+		print('CHAIN: ' + str(current_chain)) 
+
+func update_points(points_reward):
+	points += points_reward
+	emit_signal('update_points')
 	
 func block_colors_match(block1, block2):
 	return block1.get_node('Sprite').modulate == block2.get_node('Sprite').modulate
@@ -272,7 +294,17 @@ func find_matches():
 			
 	for matching_block in matching_blocks:
 		delete_block(matching_block)
+
+func add_row_from_bottom(pixel_difference=128):
+	for i in range(width):
+		var random_block = add_random_block()
+		random_block.global_position = grid_position_to_pixel(i, height)
+		random_block.hit_bottom(true)
 		
+	# Move up all blocks that hit bottom.
+	for block in blocks:
+		if block.has_hit_bottom:
+			block.global_position.y -= pixel_difference
 
 func print_block_names():
 	print('#### block names ####')
@@ -299,8 +331,12 @@ func _on_DropTimer_timeout():
 	$SpawnTimer.start()
 	$DropTimer.stop()
 
-
 func _on_SpawnTimer_timeout():
 	add_random_block()
 	$SpawnTimer.stop()
 	$DropTimer.start()
+
+
+func _on_ChainTimer_timeout():
+	print('CHAIN RESET BACK TO 0')
+	current_chain = 0
