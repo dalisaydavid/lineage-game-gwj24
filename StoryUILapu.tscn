@@ -117,26 +117,26 @@ rect_min_size = Vector2( 0, 512 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/StoryContainer"]
 margin_right = 384.0
-margin_bottom = 161.0
+margin_bottom = 127.0
 
 [node name="DialogLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
 margin_right = 384.0
-margin_bottom = 65.0
+margin_bottom = 31.0
 theme = SubResource( 8 )
-text = "\"I will defend my people to the death!\""
+text = "[ENTER] to continue"
 align = 1
 autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
-margin_top = 69.0
+margin_top = 35.0
 margin_right = 384.0
-margin_bottom = 73.0
+margin_bottom = 39.0
 
 [node name="StoryTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
 modulate = Color( 0, 0, 0, 1 )
-margin_top = 77.0
+margin_top = 43.0
 margin_right = 384.0
-margin_bottom = 120.0
+margin_bottom = 86.0
 theme = SubResource( 10 )
 text = "Story"
 autowrap = true
@@ -147,9 +147,9 @@ uppercase = true
 [node name="ShrinkTween" type="Tween" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel"]
 
 [node name="StoryLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
-margin_top = 124.0
+margin_top = 90.0
 margin_right = 384.0
-margin_bottom = 161.0
+margin_bottom = 127.0
 theme = SubResource( 12 )
 autowrap = true
 

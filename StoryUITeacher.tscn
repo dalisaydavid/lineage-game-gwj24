@@ -108,7 +108,7 @@ rect_min_size = Vector2( 0, 384 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/VBoxContainer/OpponentContainer"]
 position = Vector2( 184.466, 179.953 )
 frames = SubResource( 6 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="StoryContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
@@ -119,20 +119,20 @@ rect_min_size = Vector2( 0, 512 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/StoryContainer"]
 margin_right = 384.0
-margin_bottom = 45.0
+margin_bottom = 80.0
 
 [node name="DialogLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
-visible = false
 margin_right = 384.0
-margin_bottom = 65.0
+margin_bottom = 31.0
 theme = SubResource( 8 )
-text = "\"I will defend my people to the death!\""
+text = "[ENTER] to continue"
 align = 1
 autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
+margin_top = 35.0
 margin_right = 384.0
-margin_bottom = 4.0
+margin_bottom = 39.0
 
 [node name="StoryTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
 visible = false
@@ -146,8 +146,8 @@ autowrap = true
 uppercase = true
 
 [node name="StoryLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
-margin_top = 8.0
+margin_top = 43.0
 margin_right = 384.0
-margin_bottom = 45.0
+margin_bottom = 80.0
 theme = SubResource( 12 )
 autowrap = true

@@ -10,7 +10,6 @@ var dialog_index = 0
 
 func _ready():
 	set_process_input(true)
-	update_story_label()
 
 func _input(event):
 	if event.is_action_released("choose"):
