@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="lineage-game-gwj24"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Teacher.tscn"
 config/icon="res://icon.png"
 
 [display]

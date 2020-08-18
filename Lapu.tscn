@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://code/Camera2D.gd" type="Script" id=1]
+[ext_resource path="res://Puzzle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://StoryUILapu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://BlockChooser.tscn" type="PackedScene" id=4]
+[ext_resource path="res://code/Lapu.gd" type="Script" id=5]
+[ext_resource path="res://sprites/Environment/LapuScene.png" type="Texture" id=6]
+[ext_resource path="res://FinishedBG.tscn" type="PackedScene" id=7]
+
+[node name="Lapu" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="LapuBG" type="Sprite" parent="."]
+position = Vector2( 320, 512 )
+texture = ExtResource( 6 )
+
+[node name="Puzzle" parent="." instance=ExtResource( 2 )]
+
+[node name="BlockChooser" parent="." instance=ExtResource( 4 )]
+
+[node name="StoryUI" parent="." instance=ExtResource( 3 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 512 )
+current = true
+script = ExtResource( 1 )
+shake_amount = 2
+
+[node name="ShakeTimer" type="Timer" parent="Camera2D"]
+wait_time = 0.5
+one_shot = true
+
+[node name="FinishedBG" parent="." instance=ExtResource( 7 )]
+[connection signal="timeout" from="Camera2D/ShakeTimer" to="Camera2D" method="_on_ShakeTimer_timeout"]

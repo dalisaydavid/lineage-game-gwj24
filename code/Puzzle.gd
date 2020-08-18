@@ -12,11 +12,13 @@ var block_chooser = null
 const NUM_SETUP_BLOCKS = 20
 var setup_blocks = 0
 var current_chain = 0
+var end_puzzle = false
+var start_puzzle = false
 var floating_text_scene = load("res://FloatingText.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_process_input(true)
+	pass
 	# Green vertical column.
 #	add_block(0,0)
 #	add_block(0,1)
@@ -36,7 +38,12 @@ func _ready():
 #	# Blue-violet horizontal row.
 #	add_block(3,2)
 #	add_block(4,2)
+	# setup_puzzle()
+
+func start():
+	set_process_input(true)
 	setup_puzzle()
+	start_puzzle = true
 
 func setup_puzzle(number_of_blocks=20):
 	drop_multiple_blocks(20)
@@ -66,29 +73,48 @@ func pixel_to_grid_position(x_pixel, y_pixel):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	var end_game_status = is_puzzle_over()
+	if end_game_status != -1:
+		if not end_puzzle:
+			end_puzzle(end_game_status)
+		
+
+func pause_timers():
+	$SpawnTimer.set_paused(true)
+	$ChainTimer.set_paused(true)
+	$DropTimer.set_paused(true)
+	$TickTimer.set_paused(true)
+	
+func end_puzzle(end_game_status):
+	pause_timers()
+	set_process_input(false)
+	get_parent().get_node("StoryUI").move_story_title_label()
+	delete_all_blocks()
+	get_parent().get_node("FinishedBG").appear(end_game_status)
+	end_puzzle = true
+
+func delete_all_blocks():
+	for block in blocks:
+		delete_block(block)
 
 func add_random_block():
 	randomize()
 	
 	return add_block(randi() % width, 0, Color(-1,-1,-1,-1))
 
-func is_game_over():
+func is_puzzle_over():
 	var story_ui = get_parent().get_node('StoryUI')
 	if story_ui != null:
 		if story_ui.is_text_fully_revealed():
-			return true
+			return 1
 		
 	# If there is 1 block that is above row 0, then the blocks have gone too high.	
 	for block in blocks:
 		var block_grid_position = pixel_to_grid_position(block.global_position.x, block.global_position.y)
 		if block_grid_position.y < 0:
-			return true
+			return 0
 		
-	return false
-func game_over():
-	print('Game over.')
-	
+	return -1
 
 
 
@@ -365,9 +391,6 @@ func _on_TickTimer_timeout():
 			drop_block(block)
 
 	find_matches()
-	
-	if is_game_over():
-		game_over()
 
 func _on_DropTimer_timeout():
 	sort_blocks(blocks)

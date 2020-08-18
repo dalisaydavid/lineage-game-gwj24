@@ -23,10 +23,25 @@ func _ready():
 	puzzle = get_parent().get_node('Puzzle')
 	puzzle.connect('delete_block', self, 'count_deleted_blocks')
 	puzzle.connect('delete_block', self, 'update_story_label')
+	
+func move_story_title_label():
+	var tween = get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/Tween")
+	tween.interpolate_property(
+		get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel"), 
+		'rect_scale',
+		Vector2(1, 1), 
+		Vector2(1.15, 1.15), 
+		1,
+		Tween.TRANS_QUART, 
+		Tween.EASE_OUT
+	)
+	tween.start()
 
 func _process(delta):
 	#if $HBoxContainer/AttackTimer.time_left / float(floor($HBoxContainer/AttackTimer.time_left)) == 1:
-	$HBoxContainer/VBoxContainer/AbilityLabel.set_text(str(floor($HBoxContainer/AttackTimer.time_left)))
+	if puzzle != null:
+		if not puzzle.end_puzzle and puzzle.start_puzzle:
+			$HBoxContainer/VBoxContainer/AbilityLabel.set_text(str(floor($HBoxContainer/AttackTimer.time_left)))
 
 func is_text_fully_revealed():
 	var text_so_far = PoolStringArray(revealed_text_as_tokens).join(" ")
@@ -58,6 +73,26 @@ func update_dialog_label():
 
 func _on_AttackTimer_timeout():
 	if puzzle != null:
+		if puzzle.end_puzzle:
+			return
+
 		puzzle.add_row_of_blocks(5)
 		
 		update_dialog_label()
+
+func _on_Tween_tween_all_completed():
+	var tween = get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/ShrinkTween")
+	tween.interpolate_property(
+		get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel"), 
+		'rect_scale',
+		Vector2(1.15, 1.15), 
+		Vector2(1, 1),
+		1,
+		Tween.TRANS_QUART, 
+		Tween.EASE_OUT
+	)
+	tween.start()
+
+
+func _on_ShrinkTween_tween_all_completed():
+	move_story_title_label()
