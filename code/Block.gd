@@ -18,7 +18,6 @@ var colors = [
 	Color('0ead69')
 ]
 
-
 const HIT_BOTTOM_COLOR = Color.darkred
 
 var points_reward = 5
@@ -64,6 +63,7 @@ func is_diagonal(other_block, pixel_difference=128):
 	return abs(self.global_position.y  - other_block.global_position.y) == pixel_difference and abs(self.global_position.x - other_block.global_position.x) == pixel_difference
 
 func delete():
+	$Light2D.enabled = true
 	var tween = get_node('DeleteTween')
 	tween.interpolate_property(
 		self, 

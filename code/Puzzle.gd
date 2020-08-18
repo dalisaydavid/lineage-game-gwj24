@@ -12,6 +12,7 @@ var block_chooser = null
 const NUM_SETUP_BLOCKS = 20
 var setup_blocks = 0
 var current_chain = 0
+var floating_text_scene = load("res://FloatingText.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process_input(true)
@@ -38,10 +39,7 @@ func _ready():
 	setup_puzzle()
 
 func setup_puzzle(number_of_blocks=20):
-	for i in range(number_of_blocks):
-		var random_block = add_random_block()
-		if can_block_move(random_block):
-			drop_block(random_block)
+	drop_multiple_blocks(20)
 
 	$TickTimer.start()
 	$SpawnTimer.start()
@@ -134,6 +132,7 @@ func drop_block(block, pixel_difference=128):
 	
 func delete_block(block):
 	blocks.remove(blocks.find(block))
+	var block_position = Vector2(block.global_position.x, block.global_position.y)
 	var points_reward = block.delete()
 	update_points(points_reward)
 	emit_signal('delete_block')
@@ -141,7 +140,6 @@ func delete_block(block):
 	if not $ChainTimer.is_stopped():
 		$ChainTimer.start()
 		current_chain += 1
-		print('CHAIN: ' + str(current_chain)) 
 
 func update_points(points_reward):
 	points += points_reward
@@ -291,10 +289,21 @@ func find_matches():
 		if surrounding_blocks.size() >= 3:
 			matching_blocks = extend_but_ignore_duplicates(matching_blocks, [block])
 			matching_blocks = extend_but_ignore_duplicates(matching_blocks, surrounding_blocks)
-			
+	
+	var first_matching_block_position = null
+	if matching_blocks.size() > 1:
+		first_matching_block_position = Vector2(matching_blocks[0].global_position.x, matching_blocks[0].global_position.y)
+		
 	for matching_block in matching_blocks:
 		delete_block(matching_block)
-
+	
+	if first_matching_block_position != null:
+		var floating_text_node = floating_text_scene.instance()
+		get_parent().add_child(floating_text_node)
+		floating_text_node.global_position = first_matching_block_position
+		floating_text_node.get_node('Label').set_text('Chain ' + str(current_chain) + '!')
+		floating_text_node.float_up()
+	
 func add_row_from_bottom(pixel_difference=128):
 	for i in range(width):
 		var random_block = add_random_block()
@@ -306,6 +315,21 @@ func add_row_from_bottom(pixel_difference=128):
 		if block.has_hit_bottom:
 			block.global_position.y -= pixel_difference
 
+func drop_multiple_blocks(number_of_blocks):
+	for i in range(number_of_blocks):
+		var random_block = add_random_block()
+		if can_block_move(random_block):
+			drop_block(random_block)
+			
+func add_multiple_blocks(number_of_blocks):
+	for i in range(number_of_blocks):
+		add_random_block()
+		
+func add_row_of_blocks(number_of_blocks):
+	for i in range(min(number_of_blocks, width)):
+		add_block(i, 0, Color(-1,-1,-1,-1))
+
+				
 func print_block_names():
 	print('#### block names ####')
 	for block in blocks:
