@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/Lapu/LapuWindow3.png" type="Texture" id=4]
 [ext_resource path="res://sprites/Lapu/LapuWindow2.png" type="Texture" id=5]
 [ext_resource path="res://sprites/Lapu/LapuWindow4.png" type="Texture" id=6]
-[ext_resource path="res://code/StoryUI.gd" type="Script" id=7]
+[ext_resource path="res://code/StoryUILapu.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxLine" id=1]
 thickness = 5
@@ -19,14 +19,14 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=3]
 default_font = SubResource( 2 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=13]
 size = 64
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=12]
-default_font = SubResource( 11 )
+[sub_resource type="Theme" id=14]
+default_font = SubResource( 13 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ) ],
 "loop": true,
@@ -49,14 +49,14 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=10]
 default_font = SubResource( 9 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=11]
 size = 36
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=6]
-default_font = SubResource( 5 )
+[sub_resource type="Theme" id=12]
+default_font = SubResource( 11 )
 
-[node name="StoryUILapu" type="MarginContainer"]
+[node name="StoryUI" type="MarginContainer"]
 margin_right = 1024.0
 margin_bottom = 1024.0
 rect_min_size = Vector2( 1024, 1024 )
@@ -95,7 +95,7 @@ uppercase = true
 margin_top = 137.0
 margin_right = 384.0
 margin_bottom = 202.0
-theme = SubResource( 12 )
+theme = SubResource( 14 )
 align = 1
 
 [node name="OpponentContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
@@ -106,8 +106,7 @@ rect_min_size = Vector2( 0, 384 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/VBoxContainer/OpponentContainer"]
 position = Vector2( 184.466, 179.953 )
-frames = SubResource( 4 )
-frame = 4
+frames = SubResource( 15 )
 playing = true
 
 [node name="StoryContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
@@ -147,7 +146,7 @@ uppercase = true
 margin_top = 124.0
 margin_right = 384.0
 margin_bottom = 161.0
-theme = SubResource( 6 )
+theme = SubResource( 12 )
 autowrap = true
 
 [node name="AttackTimer" type="Timer" parent="HBoxContainer"]

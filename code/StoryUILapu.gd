@@ -1,6 +1,6 @@
 extends MarginContainer
 
-
+signal text_fully_revealed
 var final_text = "Today, Lapu won a war. He fought for the people of his country. And he made history. From this day forward, no one will forget the name Lapu Cruz and the Cruz tribe." 
 var text_as_tokens = []
 var token_index_bag = []

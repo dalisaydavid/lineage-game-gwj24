@@ -13,6 +13,7 @@ const NUM_SETUP_BLOCKS = 20
 var setup_blocks = 0
 var current_chain = 0
 var floating_text_scene = load("res://FloatingText.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process_input(true)
@@ -35,7 +36,6 @@ func _ready():
 #	# Blue-violet horizontal row.
 #	add_block(3,2)
 #	add_block(4,2)
-
 	setup_puzzle()
 
 func setup_puzzle(number_of_blocks=20):
@@ -72,6 +72,25 @@ func add_random_block():
 	randomize()
 	
 	return add_block(randi() % width, 0, Color(-1,-1,-1,-1))
+
+func is_game_over():
+	var story_ui = get_parent().get_node('StoryUI')
+	if story_ui != null:
+		if story_ui.is_text_fully_revealed():
+			return true
+		
+	# If there is 1 block that is above row 0, then the blocks have gone too high.	
+	for block in blocks:
+		var block_grid_position = pixel_to_grid_position(block.global_position.x, block.global_position.y)
+		if block_grid_position.y < 0:
+			return true
+		
+	return false
+func game_over():
+	print('Game over.')
+	
+
+
 
 func is_position_occupied(x, y):
 	for block in blocks:
@@ -328,6 +347,8 @@ func add_multiple_blocks(number_of_blocks):
 func add_row_of_blocks(number_of_blocks):
 	for i in range(min(number_of_blocks, width)):
 		add_block(i, 0, Color(-1,-1,-1,-1))
+		
+	$DropTimer.start()
 
 				
 func print_block_names():
@@ -344,6 +365,9 @@ func _on_TickTimer_timeout():
 			drop_block(block)
 
 	find_matches()
+	
+	if is_game_over():
+		game_over()
 
 func _on_DropTimer_timeout():
 	sort_blocks(blocks)
@@ -362,5 +386,11 @@ func _on_SpawnTimer_timeout():
 
 
 func _on_ChainTimer_timeout():
-	print('CHAIN RESET BACK TO 0')
+	if current_chain > 0:
+		var floating_text_node = floating_text_scene.instance()
+		get_parent().add_child(floating_text_node)
+		floating_text_node.global_position = get_parent().get_node("BlockChooser").global_position
+		floating_text_node.get_node('Label').set_text('Chain reset to 0.')
+		floating_text_node.float_up()
+
 	current_chain = 0
