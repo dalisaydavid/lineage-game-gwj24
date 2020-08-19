@@ -91,6 +91,9 @@ func end_puzzle(end_game_status):
 	get_parent().get_node("StoryUI").move_story_title_label()
 	delete_all_blocks()
 	get_parent().get_node("FinishedBG").appear(end_game_status)
+	
+	if end_game_status == 1:
+		$"/root/AudioPlayer".play("res://music/win.wav", false)
 	end_puzzle = true
 
 func delete_all_blocks():

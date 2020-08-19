@@ -10,16 +10,21 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func play(track):
+func play(track, fade_in=true):
 	$AudioStreamPlayer.stop()
 	$AudioStreamPlayer.stream = load(track)
-	$AudioStreamPlayer.volume_db = -80
 	$AudioStreamPlayer.play()
-	fade_in()
+	
+	if fade_in:
+		$AudioStreamPlayer.volume_db = -25
+		fade_in()
+	else:
+		$AudioStreamPlayer.volume_db = -10
+		$VolumeInTween.start()
 
 func fade_in():
 	print("FADING IN")
-	$VolumeInTween.interpolate_property($AudioStreamPlayer, "volume_db", -80, -10, 4, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN, 0)
+	$VolumeInTween.interpolate_property($AudioStreamPlayer, "volume_db", -25, -10, 4, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN, 0)
 	$VolumeInTween.start()
 
 

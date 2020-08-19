@@ -6,8 +6,8 @@ var dialog = [
 	"... The family tree project!",
 	"Each one of you will be researching your family's history and presenting it to the class.",
 	"You could spend time asking family members and looking through family albums...",
-	"Or you could just use findmyfamily.com.",
-	"For homework, everyone should go to findmyfamily.com and learn a bit more about your ancestors.",
+	"Or you could just use the internet.",
+	"For homework, everyone should go online and learn a bit more about your ancestors.",
 	"Have fun!"
 ]
 var dialog_index = 0
