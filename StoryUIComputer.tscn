@@ -8,16 +8,16 @@
 [ext_resource path="res://sprites/Teacher/Teacher5.png" type="Texture" id=6]
 [ext_resource path="res://code/StoryUIComputer.gd" type="Script" id=7]
 
-[sub_resource type="StyleBoxLine" id=6]
+[sub_resource type="StyleBoxLine" id=1]
 thickness = 5
 vertical = true
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=8]
-default_font = SubResource( 7 )
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 32
@@ -26,7 +26,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=5]
 default_font = SubResource( 4 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
@@ -34,27 +34,27 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=7]
 size = 30
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=11]
-default_font = SubResource( 10 )
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=9]
 size = 42
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=13]
-default_font = SubResource( 12 )
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=11]
 size = 36
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=15]
-default_font = SubResource( 14 )
+[sub_resource type="Theme" id=12]
+default_font = SubResource( 11 )
 
 [node name="StoryUI" type="MarginContainer"]
 margin_right = 1024.0
@@ -74,7 +74,7 @@ margin_bottom = 1074.0
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 margin_right = 4.0
 margin_bottom = 1074.0
-custom_styles/separator = SubResource( 6 )
+custom_styles/separator = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 8.0
@@ -85,7 +85,7 @@ rect_min_size = Vector2( 384, 0 )
 [node name="Manny" type="Label" parent="HBoxContainer/VBoxContainer"]
 margin_right = 384.0
 margin_bottom = 133.0
-theme = SubResource( 8 )
+theme = SubResource( 3 )
 text = "
 Manny"
 align = 1
@@ -107,8 +107,8 @@ rect_min_size = Vector2( 0, 384 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/VBoxContainer/OpponentContainer"]
 position = Vector2( 184, 186 )
-frames = SubResource( 9 )
-frame = 3
+frames = SubResource( 6 )
+frame = 1
 playing = true
 
 [node name="StoryContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
@@ -119,20 +119,20 @@ rect_min_size = Vector2( 0, 512 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/StoryContainer"]
 margin_right = 384.0
-margin_bottom = 45.0
+margin_bottom = 80.0
 
 [node name="DialogLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
-visible = false
 margin_right = 384.0
-margin_bottom = 65.0
-theme = SubResource( 11 )
-text = "\"I will defend my people to the death!\""
+margin_bottom = 31.0
+theme = SubResource( 8 )
+text = "[Enter] to continue"
 align = 1
 autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
+margin_top = 35.0
 margin_right = 384.0
-margin_bottom = 4.0
+margin_bottom = 39.0
 
 [node name="StoryTitleLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
 visible = false
@@ -140,14 +140,14 @@ modulate = Color( 0, 0, 0, 1 )
 margin_top = 77.0
 margin_right = 384.0
 margin_bottom = 120.0
-theme = SubResource( 13 )
+theme = SubResource( 10 )
 text = "Story"
 autowrap = true
 uppercase = true
 
 [node name="StoryLabel" type="Label" parent="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer"]
-margin_top = 8.0
+margin_top = 43.0
 margin_right = 384.0
-margin_bottom = 45.0
-theme = SubResource( 15 )
+margin_bottom = 80.0
+theme = SubResource( 12 )
 autowrap = true

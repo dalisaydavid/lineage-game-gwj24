@@ -10,7 +10,7 @@ var dialog = [
 	"For homework, everyone should go to findmyfamily.com and learn a bit more about your ancestors.",
 	"Have fun!"
 ]
-var dialog_index = -1
+var dialog_index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,14 +21,15 @@ func _input(event):
 		show_next_dialog()
 		
 func show_next_dialog():
-	dialog_index += 1
 	
 	if dialog_index == dialog.size():
 		get_parent().get_node("NextButton").visible = true
 		return
-	
-	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryLabel.set_text(dialog[dialog_index])
+	else:
+		$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryLabel.set_text(dialog[dialog_index])
 
+
+	dialog_index += 1
 
 
 func _on_TextureButton_pressed():

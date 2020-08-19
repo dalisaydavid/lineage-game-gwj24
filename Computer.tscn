@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://sprites/Environment/Computer.png" type="Texture" id=1]
 [ext_resource path="res://StoryUIComputer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://fonts/Hi_Melody/HiMelody-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://code/URLBar.gd" type="Script" id=4]
 [ext_resource path="res://sprites/Environment/Arrow.png" type="Texture" id=5]
+[ext_resource path="res://music/discovery.wav" type="AudioStream" id=6]
+[ext_resource path="res://code/Computer.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -24,6 +26,7 @@ font_data = ExtResource( 3 )
 default_font = SubResource( 4 )
 
 [node name="Computer" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="ComputerSprite" type="Sprite" parent="."]
 position = Vector2( 328, 512 )
@@ -71,5 +74,9 @@ texture_normal = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
 [connection signal="text_entered" from="URLBar/TextEdit" to="URLBar" method="_on_TextEdit_text_entered"]
 [connection signal="pressed" from="NextButton/TextureButton" to="StoryUI" method="_on_TextureButton_pressed"]
