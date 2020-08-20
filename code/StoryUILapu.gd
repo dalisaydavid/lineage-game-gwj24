@@ -24,6 +24,8 @@ func _ready():
 	puzzle.connect('delete_block', self, 'count_deleted_blocks')
 	puzzle.connect('delete_block', self, 'update_story_label')
 	
+	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/DialogLabel.text = "Manny: Where am I? I don't feel like myself..."
+	
 func move_story_title_label():
 	var tween = get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/Tween")
 	tween.interpolate_property(

@@ -2,10 +2,10 @@ extends MarginContainer
 
 var dialog = [
 	"Good morning class.",
-	"This semester, we're going to be doing a fun new project. Hold on to your boots",
+	"This semester, we're going to be doing a fun new project. Hold on to your boots.",
 	"... The family tree project!",
 	"Each one of you will be researching your family's history and presenting it to the class.",
-	"You could spend time asking family members and looking through family albums...",
+	"You could spend time asking family members and reading books...",
 	"Or you could just use the internet.",
 	"For homework, everyone should go online and learn a bit more about your ancestors.",
 	"Have fun!"
