@@ -24,7 +24,7 @@ func _ready():
 	puzzle.connect('delete_block', self, 'count_deleted_blocks')
 	puzzle.connect('delete_block', self, 'update_story_label')
 	
-	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/DialogLabel.text = "Manny: Where am I? I don't feel like myself..."
+	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/DialogLabel.text = "Manny: Where am I? I don't feel like myself... \n\n [ENTER] to continue."
 	
 func move_story_title_label():
 	var tween = get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/Tween")
@@ -78,7 +78,8 @@ func _on_AttackTimer_timeout():
 		if puzzle.end_puzzle:
 			return
 
-		puzzle.add_row_of_blocks(5)
+		get_parent().get_node("Alert/Timer").start()
+		get_parent().get_node("Alert").visible = true
 		
 		update_dialog_label()
 

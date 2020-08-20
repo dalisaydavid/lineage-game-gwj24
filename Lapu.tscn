@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://code/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://Puzzle.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://sprites/Environment/LapuScene.png" type="Texture" id=6]
 [ext_resource path="res://FinishedBG.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sprites/Light/light.png" type="Texture" id=8]
+[ext_resource path="res://sprites/Environment/Arrow.png" type="Texture" id=9]
+[ext_resource path="res://sprites/Environment/Alert.png" type="Texture" id=10]
 
 [node name="Lapu" type="Node2D"]
 script = ExtResource( 5 )
@@ -21,6 +23,8 @@ texture = ExtResource( 6 )
 [node name="BlockChooser" parent="." instance=ExtResource( 4 )]
 
 [node name="StoryUI" parent="." instance=ExtResource( 3 )]
+margin_right = 1032.0
+margin_bottom = 1072.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 512 )
@@ -40,4 +44,28 @@ texture = ExtResource( 8 )
 texture_scale = 7.79
 
 [node name="UnshineTween" type="Tween" parent="Light2D"]
+
+[node name="NextArrow" type="Position2D" parent="."]
+visible = false
+position = Vector2( 944, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="TextureButton" type="TextureButton" parent="NextArrow"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Alert" type="Sprite" parent="."]
+visible = false
+position = Vector2( 328, 448 )
+texture = ExtResource( 10 )
+
+[node name="Timer" type="Timer" parent="Alert"]
+wait_time = 2.0
+one_shot = true
 [connection signal="timeout" from="Camera2D/ShakeTimer" to="Camera2D" method="_on_ShakeTimer_timeout"]
+[connection signal="pressed" from="NextArrow/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="timeout" from="Alert/Timer" to="." method="_on_Timer_timeout"]

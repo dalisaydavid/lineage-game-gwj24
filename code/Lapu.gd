@@ -39,3 +39,12 @@ func unshine():
 	)
 	tween.start()
 
+
+
+func _on_TextureButton_pressed():
+	get_tree().change_scene("res://Riza.tscn")
+
+
+func _on_Timer_timeout():
+	$Puzzle.add_row_of_blocks(5)
+	$Alert.visible = false

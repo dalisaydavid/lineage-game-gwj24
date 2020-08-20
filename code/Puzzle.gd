@@ -77,6 +77,8 @@ func _process(delta):
 	if end_game_status != -1:
 		if not end_puzzle:
 			end_puzzle(end_game_status)
+			
+			
 		
 
 func pause_timers():
@@ -91,6 +93,8 @@ func end_puzzle(end_game_status):
 	get_parent().get_node("StoryUI").move_story_title_label()
 	delete_all_blocks()
 	get_parent().get_node("FinishedBG").appear(end_game_status)
+	get_parent().get_node("NextArrow").visible = true
+	get_parent().get_node("Alert").visible = false
 	
 	if end_game_status == 1:
 		$"/root/AudioPlayer".play("res://music/win.wav", false)
@@ -99,6 +103,10 @@ func end_puzzle(end_game_status):
 func delete_all_blocks():
 	for block in blocks:
 		delete_block(block)
+		
+	for child in get_parent().get_children():
+		if child.is_in_group('block'):
+			get_parent().remove_child(child)
 
 func add_random_block():
 	randomize()
@@ -130,6 +138,35 @@ func is_position_occupied(x, y):
 			
 	return false
 
+func explode_random_block():
+	randomize()
+	var random_block = blocks[randi() % blocks.size()]
+	explode_block(random_block)
+	
+func explode_block(block):
+	var exploding_blocks = get_touching_blocks(block)
+	for exploding_block in exploding_blocks:
+		if not is_instance_valid(exploding_block):
+			continue
+			
+		var more_exploding_blocks = get_touching_blocks(exploding_block)
+		exploding_block.set_color(Color.firebrick)
+		delete_block(exploding_block, false, false)
+		for another_exploding_block in more_exploding_blocks:
+			if not is_instance_valid(another_exploding_block):
+				continue
+			another_exploding_block.set_color(Color.firebrick)
+			delete_block(another_exploding_block, false, false)
+	
+func get_touching_blocks(block, pixel_difference=128):
+	var touching_blocks = [block]
+	for other_block in blocks:
+		if block.is_touching(other_block):
+			touching_blocks.append(other_block)
+
+	return touching_blocks
+
+	
 func add_block(x, y, color=Color.greenyellow):
 	# At position (0,0), block should be drawn at pixel (64,64)
 #	if is_position_occupied(x, y):
@@ -178,16 +215,20 @@ func drop_block(block, pixel_difference=128):
 	while can_block_move(block):
 		block.global_position.y += pixel_difference
 	
-func delete_block(block):
+func delete_block(block, reward_points=true, add_to_chain=true):
 	blocks.remove(blocks.find(block))
 	var block_position = Vector2(block.global_position.x, block.global_position.y)
 	var points_reward = block.delete()
-	update_points(points_reward)
+	
+	if reward_points:
+		update_points(points_reward)
 	emit_signal('delete_block')
 	
 	if not $ChainTimer.is_stopped():
 		$ChainTimer.start()
-		current_chain += 1
+		
+		if add_to_chain:
+			current_chain += 1
 
 func update_points(points_reward):
 	points += points_reward
@@ -378,6 +419,10 @@ func add_row_of_blocks(number_of_blocks):
 		add_block(i, 0, Color(-1,-1,-1,-1))
 		
 	$DropTimer.start()
+	
+func replace_blocks():
+	for block in blocks:
+		block.set_color(Color(-1,-1,-1,-1))
 
 				
 func print_block_names():

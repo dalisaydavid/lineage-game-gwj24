@@ -12,6 +12,7 @@ var dialog_index = 0
 func _ready():
 	set_process_input(true)
 	unshine()
+	$"/root/AudioPlayer".play("res://music/riza.wav", false)
 
 func _input(event):
 	if event.is_action_released("choose"):
@@ -19,7 +20,6 @@ func _input(event):
 		
 		if dialog_index == dialog.size():
 			get_node('Puzzle').start()
-			$"/root/AudioPlayer".play("res://music/riza.wav", false)
 			set_process_input(false)
 
 func update_story_label():
@@ -40,3 +40,12 @@ func unshine():
 	)
 	tween.start()
 
+
+
+func _on_Timer_timeout():
+	$Puzzle.replace_blocks()
+	$Alert.visible = false
+
+
+func _on_TextureButton_pressed():
+	get_tree().change_scene("res://Jano.tscn")
