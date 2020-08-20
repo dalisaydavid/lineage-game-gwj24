@@ -1,15 +1,14 @@
 extends MarginContainer
 
 signal text_fully_revealed
-var final_text = "Riza worked day and night for years, perfecting her book. She was continuously criticized by her competitors, nearly convincing her to give up on her dreams on becoming a historical author. Her book 'The Great History of Lapu Cruz', a documentary about her grandfather, is in almost every household in the nation, cited by the most prestigious universities." 
+var final_text = "Jano Cruz figured it out. He invented the greatest technological invention of all time. The \"whoosy-whats-it\". He spent countless nights battling his own mind. He finally won."
 var text_as_tokens = []
 var token_index_bag = []
 var revealed_text_as_tokens = []
 var puzzle = null
-var chain_required_for_word = 10
-var total_blocks_deleted_required_for_word = 30
+var chain_required_for_word = 20
 var blocks_deleted_since_last_word = 0
-var attack_texts = ["I must work harder.", "It's not good enough!", "Get out of my way!", "I can't take this pressure.", "I'll tell our story!"]
+var attack_texts = ["And yet it compiles.", "Excellent, it broke differently this time.", "I made you, now behave!", "I will defeat you, robot!", "I'm smarter."]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,7 +23,7 @@ func _ready():
 	puzzle.connect('delete_block', self, 'count_deleted_blocks')
 	puzzle.connect('delete_block', self, 'update_story_label')
 	
-	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/DialogLabel.text = "Manny: I'm... a female now. Does this person know to Lapu? \n\n[ENTER] to continue."
+	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/DialogLabel.text = "Manny: Who am I this time? Is that computer alive?! \n\n[ENTER] to continue."
 	
 func move_story_title_label():
 	var tween = get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/Tween")

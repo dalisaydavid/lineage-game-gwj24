@@ -97,7 +97,7 @@ func end_puzzle(end_game_status):
 	get_parent().get_node("Alert").visible = false
 	
 	if end_game_status == 1:
-		$"/root/AudioPlayer".play("res://music/win.wav", false)
+		$"/root/AudioPlayer".play("res://music/win.wav", false, -20)
 	end_puzzle = true
 
 func delete_all_blocks():
@@ -149,14 +149,14 @@ func explode_block(block):
 		if not is_instance_valid(exploding_block):
 			continue
 			
-		var more_exploding_blocks = get_touching_blocks(exploding_block)
+#		var more_exploding_blocks = get_touching_blocks(exploding_block)
 		exploding_block.set_color(Color.firebrick)
 		delete_block(exploding_block, false, false)
-		for another_exploding_block in more_exploding_blocks:
-			if not is_instance_valid(another_exploding_block):
-				continue
-			another_exploding_block.set_color(Color.firebrick)
-			delete_block(another_exploding_block, false, false)
+#		for another_exploding_block in more_exploding_blocks:
+#			if not is_instance_valid(another_exploding_block):
+#				continue
+#			another_exploding_block.set_color(Color.firebrick)
+#			delete_block(another_exploding_block, false, false)
 	
 func get_touching_blocks(block, pixel_difference=128):
 	var touching_blocks = [block]

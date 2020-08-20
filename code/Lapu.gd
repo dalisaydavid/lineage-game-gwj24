@@ -18,7 +18,7 @@ func _input(event):
 		
 		if dialog_index == dialog.size():
 			get_node('Puzzle').start()
-			$"/root/AudioPlayer".play("res://music/lapu.wav", false)
+			$"/root/AudioPlayer".play("res://music/lapu.wav", false, -20)
 			set_process_input(false)
 
 func update_story_label():

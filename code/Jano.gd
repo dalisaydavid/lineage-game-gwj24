@@ -2,17 +2,17 @@ extends Node2D
 
 
 var dialog = [
-	"I am Riza, the author of 'The Great History'.",
-	"My book is... quite controversial. But it speaks the truth of the history of our country.",
-	"Other great authors tell me that I'm not good enough.",
-	"I'll show them, I'll tell them my story!",
+	"I am Jano, the smartest inventor of all time.",
+	"This here technology is my best invention yet.",
+	"Except it has a major bug: It tries to kill me.",
+	"Prepare to to become a feature, robot slave!",
 ]
 var dialog_index = 0
 
 func _ready():
 	set_process_input(true)
 	unshine()
-	$"/root/AudioPlayer".play("res://music/riza.wav", false)
+	$"/root/AudioPlayer".play("res://music/lapu.wav", false, -20)
 
 func _input(event):
 	if event.is_action_released("choose"):

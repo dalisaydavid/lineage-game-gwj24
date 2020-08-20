@@ -12,7 +12,7 @@ var dialog_index = 0
 func _ready():
 	set_process_input(true)
 	unshine()
-	$"/root/AudioPlayer".play("res://music/riza.wav", false)
+	$"/root/AudioPlayer".play("res://music/riza.wav", false, -20)
 
 func _input(event):
 	if event.is_action_released("choose"):
