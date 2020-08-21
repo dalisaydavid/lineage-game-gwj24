@@ -1,10 +1,7 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+onready var done = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +14,7 @@ func _ready():
 
 
 func appear(end_game_status):
+	$TimerBeforeContinueOption.start()
 	var tween = get_node("AppearTween")
 	
 	var sprite = null
@@ -37,3 +35,11 @@ func appear(end_game_status):
 	tween.start()
 	
 	$Position2D.set_visible(true)
+
+
+func _on_TimerBeforeContinueOption_timeout():
+	done = true
+
+
+func _on_AppearTween_tween_started(object, key):
+	done = false

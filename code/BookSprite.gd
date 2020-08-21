@@ -26,4 +26,4 @@ func shine():
 
 
 func _on_ShineTween_tween_all_completed():
-	get_tree().change_scene("res://Lapu.tscn")
+	get_tree().change_scene("res://Tutorial.tscn")

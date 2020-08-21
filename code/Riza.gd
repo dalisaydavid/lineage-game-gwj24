@@ -13,15 +13,19 @@ var dialog_index = 0
 func _ready():
 	set_process_input(true)
 	unshine()
-	$"/root/AudioPlayer".play("res://music/riza.wav", false, -40)
+	$"/root/AudioPlayer".play("res://music/riza.wav", false)
 
 func _input(event):
 	if event.is_action_released("choose"):
 		update_story_label()
 		
 		if dialog_index == dialog.size():
-			get_node('Puzzle').start()
 			set_process_input(false)
+			$CountdownBG.start()
+
+func start():
+	get_node('Puzzle').start()
+	set_process_input(false)
 
 func update_story_label():
 	get_node('StoryUI').get_node('HBoxContainer').get_node('VBoxContainer').get_node('StoryContainer').get_node('VBoxContainer').get_node('StoryLabel').text = dialog[dialog_index]
@@ -44,7 +48,8 @@ func unshine():
 
 
 func _on_Timer_timeout():
-	$Puzzle.replace_blocks()
+	if $Puzzle.start_puzzle:
+		$Puzzle.replace_blocks()
 	$Alert.visible = false
 
 

@@ -52,7 +52,7 @@ func setup_puzzle(number_of_blocks=20):
 	$SpawnTimer.start()
 
 func _input(event):
-	if end_puzzle:
+	if end_puzzle and get_parent().get_node("FinishedBG").done:
 		if event.is_action_released('choose'):
 			get_tree().change_scene(get_parent().next_scene_path)
 	else:
@@ -100,7 +100,7 @@ func end_puzzle(end_game_status):
 	get_parent().get_node("Alert").visible = false
 	
 	if end_game_status == 1:
-		$"/root/AudioPlayer".play("res://music/win.wav", false, -40)
+		$"/root/AudioPlayer".play("res://music/win.wav", false)
 	end_puzzle = true
 
 func delete_all_blocks():
@@ -115,6 +115,12 @@ func add_random_block():
 	randomize()
 	
 	return add_block(randi() % width, 0, Color(-1,-1,-1,-1))
+	
+func add_random_stone_block():
+	var random_block = add_random_block()
+	random_block.set_to_stone()
+	
+	drop_block(random_block, true)
 
 func is_puzzle_over():
 	var story_ui = get_parent().get_node('StoryUI')
@@ -196,14 +202,29 @@ func can_block_move(block, pixel_difference=128):
 		if block.global_position.y + pixel_difference == other_block.global_position.y and block.global_position.x == other_block.global_position.x:
 			block.hit_bottom(true)
 			return false
-			
-	# If the block reaches the bottom, then the block can't move.
+
+	if has_hit_bottom(block):
+		return false
+	
+	return true
+
+func has_hit_bottom(block):
+		# If the block reaches the bottom, then the block can't move.
 	var block_grid_position = pixel_to_grid_position(block.global_position.x, block.global_position.y)
 	if block_grid_position.y >= height:
 		block.hit_bottom(true)
-		return false
+		return true
+	
+	return false
 
-	return true
+func zap_random_block():
+	randomize()
+	var random_block = blocks[randi() % blocks.size()]
+	zap_block(random_block)
+	
+func zap_block(block):
+	block.zap()
+
 	
 func sort_blocks(blocks):
 	blocks.sort_custom(self, 'block_sort_comparison')
@@ -214,10 +235,19 @@ func block_sort_comparison(block_a, block_b):
 func move_block(block, pixel_difference=128):
 	block.global_position.y += pixel_difference
 	
-func drop_block(block, pixel_difference=128):
-	while can_block_move(block):
-		block.global_position.y += pixel_difference
-	
+func drop_block(block, delete_obstacle_blocks=false, pixel_difference=128):
+#	while can_block_move(block):
+#		block.global_position.y += pixel_difference
+#
+	while true:
+		if can_block_move(block):
+			block.global_position.y += pixel_difference
+		elif delete_obstacle_blocks and not has_hit_bottom(block):
+			var block_1_below = get_block_at_position(block.global_position.x, block.global_position.y+pixel_difference)
+			delete_block(block_1_below, false, false)
+		else:
+			break
+			
 func delete_block(block, reward_points=true, add_to_chain=true):
 	blocks.remove(blocks.find(block))
 	var block_position = Vector2(block.global_position.x, block.global_position.y)

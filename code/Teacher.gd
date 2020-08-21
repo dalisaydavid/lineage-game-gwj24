@@ -8,7 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$"/root/AudioPlayer".play("res://music/hopeful.wav", true, -40)
+	$"/root/AudioPlayer".play("res://music/hopeful.wav", true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

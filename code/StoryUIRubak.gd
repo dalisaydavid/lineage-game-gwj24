@@ -1,7 +1,7 @@
 extends MarginContainer
 
 signal text_fully_revealed
-var final_text = "Jano Cruz figured it out. He invented the greatest technological invention of all time. The \"whoosy-whats-it\". He spent countless nights battling his own mind. He finally won."
+var final_text = "Rubak Cruz figured it out. He invented the greatest technological invention of all time. The \"whoosy-whats-it\". He spent countless nights battling his own mind. He finally won."
 var text_as_tokens = []
 var token_index_bag = []
 var revealed_text_as_tokens = []

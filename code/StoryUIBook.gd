@@ -9,6 +9,7 @@ var dialog = [
 	"Surely my family came from somewhere... Where to begin?"
 ]
 var dialog_index = 0
+var dialog_finished = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_story_label()
@@ -16,6 +17,9 @@ func _ready():
 	set_process_input(true)
 	
 func _input(event):
+	if dialog_finished:
+		return
+		
 	if event.is_action_released("ui_accept"):
 		update_story_label()
 
@@ -26,6 +30,7 @@ func update_story_label():
 	if dialog_index >= dialog.size():
 		get_parent().get_node('BookSprite').shine()
 		$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryLabel.set_text("Whoa, what's happening!")
+		dialog_finished = true
 	else:
 		$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryLabel.set_text(dialog[dialog_index])
 		dialog_index += 1

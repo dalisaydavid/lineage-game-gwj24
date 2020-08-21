@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://code/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://Puzzle.tscn" type="PackedScene" id=2]
@@ -6,10 +6,11 @@
 [ext_resource path="res://BlockChooser.tscn" type="PackedScene" id=4]
 [ext_resource path="res://code/Lapu.gd" type="Script" id=5]
 [ext_resource path="res://sprites/Environment/LapuScene.png" type="Texture" id=6]
-[ext_resource path="res://FinishedBG.tscn" type="PackedScene" id=7]
+[ext_resource path="res://CountdownBG.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sprites/Light/light.png" type="Texture" id=8]
 [ext_resource path="res://sprites/Environment/Arrow.png" type="Texture" id=9]
 [ext_resource path="res://sprites/Environment/Alert.png" type="Texture" id=10]
+[ext_resource path="res://FinishedBG.tscn" type="PackedScene" id=11]
 
 [node name="Lapu" type="Node2D"]
 script = ExtResource( 5 )
@@ -37,7 +38,10 @@ shake_amount = 2
 wait_time = 0.5
 one_shot = true
 
-[node name="FinishedBG" parent="." instance=ExtResource( 7 )]
+[node name="FinishedBG" parent="." instance=ExtResource( 11 )]
+
+[node name="CountdownBG" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 328, 528 )

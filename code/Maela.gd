@@ -1,18 +1,19 @@
 extends Node2D
 
-
 export(String, FILE, '*tscn') var next_scene_path
 
 var dialog = [
-	"I am Lapu, leader of this country's revolution.",
-	"This is our land and I refuse to give up to the invaders!",
-	"Attack!"
+	"I am Rubak, the smartest inventor of all time.",
+	"This here technology is my best invention yet.",
+	"Except it has a major bug: It tries to kill me.",
+	"Prepare for your bugs to become features, robot!",
 ]
 var dialog_index = 0
 
 func _ready():
 	set_process_input(true)
 	unshine()
+	$"/root/AudioPlayer".play("res://music/riza.wav", false)
 
 func _input(event):
 	if event.is_action_released("choose"):
@@ -24,9 +25,8 @@ func _input(event):
 
 func start():
 	get_node('Puzzle').start()
-	$"/root/AudioPlayer".play("res://music/lapu.wav", false)
 	set_process_input(false)
-	
+
 func update_story_label():
 	get_node('StoryUI').get_node('HBoxContainer').get_node('VBoxContainer').get_node('StoryContainer').get_node('VBoxContainer').get_node('StoryLabel').text = dialog[dialog_index]
 	
@@ -45,13 +45,7 @@ func unshine():
 	)
 	tween.start()
 
-
-
-func _on_TextureButton_pressed():
-	get_tree().change_scene("res://Riza.tscn")
-
-
 func _on_Timer_timeout():
 	if $Puzzle.start_puzzle:
-		$Puzzle.add_row_of_blocks(5)
+		$Puzzle.add_random_stone_block()
 	$Alert.visible = false

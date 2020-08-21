@@ -1,5 +1,6 @@
 extends Node2D
 
+export(String, FILE, '*tscn') var next_scene_path
 
 var dialog = [
 	"I am Jano, the smartest inventor of all time.",
@@ -12,15 +13,19 @@ var dialog_index = 0
 func _ready():
 	set_process_input(true)
 	unshine()
-	$"/root/AudioPlayer".play("res://music/lapu.wav", false, -40)
+	$"/root/AudioPlayer".play("res://music/lapu.wav", false)
 
 func _input(event):
 	if event.is_action_released("choose"):
 		update_story_label()
 		
 		if dialog_index == dialog.size():
-			get_node('Puzzle').start()
 			set_process_input(false)
+			$CountdownBG.start()
+
+func start():	
+	get_node('Puzzle').start()
+	set_process_input(false)
 
 func update_story_label():
 	get_node('StoryUI').get_node('HBoxContainer').get_node('VBoxContainer').get_node('StoryContainer').get_node('VBoxContainer').get_node('StoryLabel').text = dialog[dialog_index]
@@ -42,5 +47,6 @@ func unshine():
 
 
 func _on_Timer_timeout():
-	$Puzzle.explode_random_block()
+	if $Puzzle.start_puzzle:
+		$Puzzle.explode_random_block()
 	$Alert.visible = false

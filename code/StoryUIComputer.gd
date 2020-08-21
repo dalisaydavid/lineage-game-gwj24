@@ -3,13 +3,13 @@ extends MarginContainer
 
 var dialog = [
 	"Okay... Shall we?",
-	"What was it again? findmyfamily.com? Sounds like a virus.",
+	"What was it again? lineage.com? Sounds like a virus.",
 	"Alright let's see if I remember my name...",
-	"I'll type findmyfamily.com/manny_cruz"
+	"I'll type lineage.com/manny_cruz"
 ]
 
 var next_dialog = [
-	"Hm. Must be an issue. I'll press enter again",
+	"Hm. Must be an issue. I'll press enter again.",
 	"What do you mean no results?",
 	"This is frustrating. One last try.",
 	"I have no family members?",

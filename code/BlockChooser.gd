@@ -9,7 +9,7 @@ func _ready():
 func _input(event):
 	if event.is_action_released('choose'):
 		choose()
-		
+
 func choose(pixel_difference=128):
 	var left_chooser_areas = $LeftChooser/Area2D.get_overlapping_areas()
 	var right_chooser_areas = $RightChooser/Area2D.get_overlapping_areas()
@@ -17,12 +17,27 @@ func choose(pixel_difference=128):
 	if left_chooser_areas.size() <= 0 and right_chooser_areas.size() <= 0:
 		return
 	
+	var left_block  = null
+	var right_block = null
 	if left_chooser_areas.size() > 0:
-		var left_block = left_chooser_areas[0].get_parent()
-		left_block.global_position.x += pixel_difference
+		left_block = left_chooser_areas[0].get_parent()
 	if right_chooser_areas.size() > 0:
-		var right_block = right_chooser_areas[0].get_parent()
-		right_block.global_position.x -= pixel_difference
+		right_block = right_chooser_areas[0].get_parent()
+	
+	if left_block != null:
+		if not left_block.is_zapped:
+			if right_block != null:
+				if not right_block.is_zapped:
+					left_block.global_position.x += pixel_difference
+			else:
+				left_block.global_position.x += pixel_difference
+	if right_block != null:
+		if not right_block.is_zapped:
+			if left_block != null:
+				if not left_block.is_zapped:
+					right_block.global_position.x -= pixel_difference
+			else:
+				right_block.global_position.x -= pixel_difference
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

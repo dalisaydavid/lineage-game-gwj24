@@ -41,3 +41,9 @@ __meta__ = {
 }
 
 [node name="AppearTween" type="Tween" parent="."]
+
+[node name="TimerBeforeContinueOption" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+[connection signal="tween_started" from="AppearTween" to="." method="_on_AppearTween_tween_started"]
+[connection signal="timeout" from="TimerBeforeContinueOption" to="." method="_on_TimerBeforeContinueOption_timeout"]

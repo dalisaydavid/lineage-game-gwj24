@@ -9,6 +9,7 @@ extends Node2D
 #	Color.white
 #]
 
+export var use_tutorial_color = false
 # https://coolors.co/540d6e-ee4266-ffd23f-3bceac-0ead69
 var colors = [
 	Color('540d6e'),
@@ -23,10 +24,15 @@ const HIT_BOTTOM_COLOR = Color.darkred
 var points_reward = 5
 var has_hit_bottom = false
 var is_highlighted = false
+var is_zapped = false
+var is_stone = false
 
 func _ready():
 	randomize()
 	$Sprite.modulate = colors[randi() % colors.size()]
+	
+	if use_tutorial_color:
+		$Sprite.modulate = Color('540d6e')
 
 func get_color():
 	return $Sprite.modulate
@@ -41,8 +47,13 @@ func set_color(color):
 func hit_bottom(b):
 	has_hit_bottom = b
 	
-	# if has_hit_bottom:
-	#	$Sprite.modulate = HIT_BOTTOM_COLOR
+func zap():
+	is_zapped = true
+	$ZapSprite.visible = true
+
+func set_to_stone():
+	is_stone = true
+	$Sprite.modulate = Color.slategray
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -77,7 +88,6 @@ func delete():
 	tween.start()
 	
 	return points_reward
-
 
 func _on_DeleteTween_tween_all_completed():
 	queue_free()

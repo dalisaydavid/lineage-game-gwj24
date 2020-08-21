@@ -6,7 +6,7 @@ var text_as_tokens = []
 var token_index_bag = []
 var revealed_text_as_tokens = []
 var puzzle = null
-var chain_required_for_word = 10
+var chain_required_for_word = 4
 var total_blocks_deleted_required_for_word = 30
 var blocks_deleted_since_last_word = 0
 var attack_texts = ["I must work harder.", "It's not good enough!", "Get out of my way!", "I can't take this pressure.", "I'll tell our story!"]
@@ -75,7 +75,7 @@ func update_dialog_label():
 
 func _on_AttackTimer_timeout():
 	if puzzle != null:
-		if puzzle.end_puzzle or get_parent().dialog_index < get_parent().dialog.size():
+		if puzzle.end_puzzle or not puzzle.start_puzzle:
 			return
 
 		get_parent().get_node("Alert/Timer").start()
