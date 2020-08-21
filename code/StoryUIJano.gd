@@ -6,7 +6,7 @@ var text_as_tokens = []
 var token_index_bag = []
 var revealed_text_as_tokens = []
 var puzzle = null
-var chain_required_for_word = 20
+var chain_required_for_word = 10
 var blocks_deleted_since_last_word = 0
 var attack_texts = ["And yet it compiles.", "Excellent, it broke differently this time.", "I made you, now behave!", "I will defeat you, robot!", "I'm smarter."]
 

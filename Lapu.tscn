@@ -13,6 +13,7 @@
 
 [node name="Lapu" type="Node2D"]
 script = ExtResource( 5 )
+next_scene_path = "res://Riza.tscn"
 
 [node name="LapuBG" type="Sprite" parent="."]
 position = Vector2( 320, 512 )

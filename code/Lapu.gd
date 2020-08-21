@@ -1,6 +1,8 @@
 extends Node2D
 
 
+export(String, FILE, '*tscn') var next_scene_path
+
 var dialog = [
 	"I am Lapu, leader of this country's revolution.",
 	"This is our land and I refuse to give up to the invaders!",
@@ -18,7 +20,7 @@ func _input(event):
 		
 		if dialog_index == dialog.size():
 			get_node('Puzzle').start()
-			$"/root/AudioPlayer".play("res://music/lapu.wav", false, -20)
+			$"/root/AudioPlayer".play("res://music/lapu.wav", false, -40)
 			set_process_input(false)
 
 func update_story_label():
@@ -33,7 +35,7 @@ func unshine():
 		'energy',
 		3,
 		0, 
-		3,
+		5,
 		Tween.TRANS_QUART, 
 		Tween.EASE_OUT
 	)

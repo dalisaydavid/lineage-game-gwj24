@@ -1,5 +1,6 @@
 extends Node2D
 
+export(String, FILE, '*tscn') var next_scene_path
 
 var dialog = [
 	"I am Riza, the author of 'The Great History'.",
@@ -12,7 +13,7 @@ var dialog_index = 0
 func _ready():
 	set_process_input(true)
 	unshine()
-	$"/root/AudioPlayer".play("res://music/riza.wav", false, -20)
+	$"/root/AudioPlayer".play("res://music/riza.wav", false, -40)
 
 func _input(event):
 	if event.is_action_released("choose"):
@@ -34,7 +35,7 @@ func unshine():
 		'energy',
 		3,
 		0, 
-		3,
+		5,
 		Tween.TRANS_QUART, 
 		Tween.EASE_OUT
 	)

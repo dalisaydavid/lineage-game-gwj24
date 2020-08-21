@@ -12,7 +12,7 @@ var dialog_index = 0
 func _ready():
 	set_process_input(true)
 	unshine()
-	$"/root/AudioPlayer".play("res://music/lapu.wav", false, -20)
+	$"/root/AudioPlayer".play("res://music/lapu.wav", false, -40)
 
 func _input(event):
 	if event.is_action_released("choose"):
@@ -34,7 +34,7 @@ func unshine():
 		'energy',
 		3,
 		0, 
-		3,
+		5,
 		Tween.TRANS_QUART, 
 		Tween.EASE_OUT
 	)

@@ -23,7 +23,7 @@ func _input(event):
 func show_next_dialog():
 	
 	if dialog_index == dialog.size():
-		get_parent().get_node("NextButton").visible = true
+		get_tree().change_scene("res://Computer.tscn")
 		return
 	else:
 		$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryLabel.set_text(dialog[dialog_index])

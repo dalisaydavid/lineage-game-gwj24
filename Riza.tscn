@@ -13,6 +13,7 @@
 
 [node name="Riza" type="Node2D"]
 script = ExtResource( 5 )
+next_scene_path = "res://Jano.tscn"
 
 [node name="RizaBG" type="Sprite" parent="."]
 position = Vector2( 320, 512 )

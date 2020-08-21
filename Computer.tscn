@@ -42,8 +42,11 @@ margin_right = 480.0
 margin_bottom = 40.0
 theme = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 editable = false
 caret_blink = true
+caret_blink_speed = 1.4
 __meta__ = {
 "_edit_use_anchors_": false
 }

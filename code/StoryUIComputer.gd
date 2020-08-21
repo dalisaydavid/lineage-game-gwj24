@@ -9,10 +9,11 @@ var dialog = [
 ]
 
 var next_dialog = [
-	"Hm. Must be an issue.",
+	"Hm. Must be an issue. I'll press enter again",
 	"What do you mean no results?",
-	"This is frustrating.",
-	"I have no family members?"
+	"This is frustrating. One last try.",
+	"I have no family members?",
+	"I'll try to look through the attic..."
 ]
 var dialog_index = 0
 var dialog_finished = false
@@ -36,7 +37,7 @@ func _input(event):
 			if not dialog_finished:
 				show_next_dialog()
 			else:
-				get_parent().get_node("NextButton").visible = true
+				get_tree().change_scene("res://Book.tscn")
 			
 		else:
 			if not dialog_finished:

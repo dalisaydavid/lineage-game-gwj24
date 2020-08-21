@@ -22,7 +22,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=5]
 default_font = SubResource( 4 )
 
-[sub_resource type="SpriteFrames" id=13]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
@@ -103,7 +103,7 @@ rect_min_size = Vector2( 0, 384 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/VBoxContainer/OpponentContainer"]
 position = Vector2( 184, 188 )
-frames = SubResource( 13 )
+frames = SubResource( 6 )
 playing = true
 
 [node name="StoryContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
@@ -151,7 +151,7 @@ theme = SubResource( 12 )
 autowrap = true
 
 [node name="AttackTimer" type="Timer" parent="HBoxContainer"]
-wait_time = 10.0
+wait_time = 14.0
 autostart = true
 [connection signal="tween_all_completed" from="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/Tween" to="." method="_on_Tween_tween_all_completed"]
 [connection signal="tween_all_completed" from="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/ShrinkTween" to="." method="_on_ShrinkTween_tween_all_completed"]

@@ -110,7 +110,7 @@ rect_min_size = Vector2( 0, 384 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/VBoxContainer/OpponentContainer"]
 position = Vector2( 192, 188 )
 frames = SubResource( 6 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="StoryContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
@@ -158,7 +158,7 @@ theme = SubResource( 12 )
 autowrap = true
 
 [node name="AttackTimer" type="Timer" parent="HBoxContainer"]
-wait_time = 10.0
+wait_time = 15.0
 autostart = true
 [connection signal="tween_all_completed" from="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/Tween" to="." method="_on_Tween_tween_all_completed"]
 [connection signal="tween_all_completed" from="HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/ShrinkTween" to="." method="_on_ShrinkTween_tween_all_completed"]

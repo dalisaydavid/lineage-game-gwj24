@@ -52,8 +52,12 @@ func setup_puzzle(number_of_blocks=20):
 	$SpawnTimer.start()
 
 func _input(event):
-	if event.is_action_released('new_row'):
-		add_row_from_bottom()
+	if end_puzzle:
+		if event.is_action_released('choose'):
+			get_tree().change_scene(get_parent().next_scene_path)
+	else:
+		if event.is_action_released('new_row'):
+			add_row_from_bottom()
 		
 func init(x, y):
 	width = x
@@ -89,15 +93,14 @@ func pause_timers():
 	
 func end_puzzle(end_game_status):
 	pause_timers()
-	set_process_input(false)
 	get_parent().get_node("StoryUI").move_story_title_label()
 	delete_all_blocks()
 	get_parent().get_node("FinishedBG").appear(end_game_status)
-	get_parent().get_node("NextArrow").visible = true
+#	get_parent().get_node("NextArrow").visible = true
 	get_parent().get_node("Alert").visible = false
 	
 	if end_game_status == 1:
-		$"/root/AudioPlayer".play("res://music/win.wav", false, -20)
+		$"/root/AudioPlayer".play("res://music/win.wav", false, -40)
 	end_puzzle = true
 
 func delete_all_blocks():
