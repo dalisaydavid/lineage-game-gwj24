@@ -15,6 +15,7 @@ var current_chain = 0
 var end_puzzle = false
 var start_puzzle = false
 var floating_text_scene = load("res://FloatingText.tscn")
+var end_game_status = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,8 +54,9 @@ func setup_puzzle(number_of_blocks=20):
 
 func _input(event):
 	if end_puzzle and get_parent().get_node("FinishedBG").done:
-		if event.is_action_released('choose'):
-			get_tree().change_scene(get_parent().next_scene_path)
+		if event.is_action_released('choose') and end_game_status == 1:
+			$"/root/Global".update_shown_family_members(get_parent().name)
+			get_tree().change_scene("res://FamilyTree.tscn")
 	else:
 		if event.is_action_released('new_row'):
 			add_row_from_bottom()
@@ -77,7 +79,7 @@ func pixel_to_grid_position(x_pixel, y_pixel):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var end_game_status = is_puzzle_over()
+	end_game_status = is_puzzle_over()
 	if end_game_status != -1:
 		if not end_puzzle:
 			end_puzzle(end_game_status)

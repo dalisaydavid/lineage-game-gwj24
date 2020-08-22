@@ -9,6 +9,7 @@
 [ext_resource path="res://code/Book.gd" type="Script" id=7]
 
 [node name="Book" type="Node2D"]
+position = Vector2( -3, 2 )
 script = ExtResource( 7 )
 
 [node name="StoryUI" parent="." instance=ExtResource( 2 )]
@@ -16,7 +17,7 @@ margin_right = 1032.0
 margin_bottom = 1074.0
 
 [node name="BookSprite" type="Sprite" parent="."]
-position = Vector2( 328, 512 )
+position = Vector2( 320, 516 )
 texture = ExtResource( 1 )
 script = ExtResource( 4 )
 

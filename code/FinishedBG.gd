@@ -5,12 +5,16 @@ onready var done = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	set_process_input(true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func _input(event):
+	if event.is_action_released("restart_scene"):
+		get_tree().reload_current_scene()
 
 
 func appear(end_game_status):
@@ -20,8 +24,13 @@ func appear(end_game_status):
 	var sprite = null
 	if end_game_status == 1:
 		sprite = get_node('Sprite')
+		$Position2D/Label.set_text('Win!')
+		$Position2D/Label.set_visible(true)
 	else:
 		sprite = get_node('SpriteLose')
+		$Position2D/Label.set_text('Lose.')
+		$Position2D/Label.set_visible(true)
+		$Position2D/Label2.set_visible(true)
 	
 	tween.interpolate_property(
 		sprite,
@@ -34,7 +43,6 @@ func appear(end_game_status):
 	)
 	tween.start()
 	
-	$Position2D.set_visible(true)
 
 
 func _on_TimerBeforeContinueOption_timeout():

@@ -26,10 +26,7 @@ func _input(event):
 
 func play_next_animation():
 	if animation_index >= max_animations:
-		get_tree().change_scene("res://Lapu.tscn")
+		get_tree().change_scene("res://Tutorial2.tscn")
 	else:
 		$AnimationPlayer.play("Tutorial" + str(animation_index))
 		animation_index += 1
-		
-		if animation_index >= max_animations:
-			$RestartTitle/Label.set_text('[ENTER] to play!')

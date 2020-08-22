@@ -25,6 +25,7 @@ func _ready():
 func _process(delta):
 	if dialog_index == dialog.size() and not dialog_finished:
 		get_parent().get_node("URLBar/TextEdit").editable = true
+		get_parent().get_node("URLBar/TextEdit").select()
 		dialog_finished = true
 
 func _input(event):

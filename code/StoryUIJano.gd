@@ -1,14 +1,14 @@
 extends MarginContainer
 
 signal text_fully_revealed
-var final_text = "Jano Cruz figured it out. He invented the greatest technological invention of all time. The \"whoosy-whats-it\". He spent countless nights battling his own mind. He finally won."
+var final_text = "Jano stands completely still, waiting patiently for the battle. As the sun beats down, the shadows float over his bandana. The gang of 5 rush into earshot. He slays 1. 2. Then the third, at the 3 second mark. The last two fire continuously and impatiently to avenge their gang members. BANG - 1 shot, 2 kills. Jano Cruz slayed the deadliest gang of 5 in the country with 4 bullets."
 var text_as_tokens = []
 var token_index_bag = []
 var revealed_text_as_tokens = []
 var puzzle = null
 var chain_required_for_word = 4
 var blocks_deleted_since_last_word = 0
-var attack_texts = ["And yet it compiles.", "Excellent, it broke differently this time.", "I made you, now behave!", "I will defeat you, robot!", "I'm smarter."]
+var attack_texts = ["*Pew pew!*", "Easy shot.", "How did I miss?", "It's high noo- 11:30AM.", "Right, I don't miss."]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,7 +23,7 @@ func _ready():
 	puzzle.connect('delete_block', self, 'count_deleted_blocks')
 	puzzle.connect('delete_block', self, 'update_story_label')
 	
-	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/DialogLabel.text = "Manny: Who am I this time? Is that computer alive?! \n\n[ENTER] to continue."
+	$HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/DialogLabel.text = "Manny: Am I related to a cowboy? \n\n[ENTER] to continue."
 	
 func move_story_title_label():
 	var tween = get_node("HBoxContainer/VBoxContainer/StoryContainer/VBoxContainer/StoryTitleLabel/Tween")

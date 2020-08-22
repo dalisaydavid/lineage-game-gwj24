@@ -9,29 +9,28 @@
 [ext_resource path="res://sprites/Environment/Arrow.png" type="Texture" id=9]
 [ext_resource path="res://sprites/Environment/Alert.png" type="Texture" id=10]
 
-[sub_resource type="DynamicFont" id=6]
-size = 48
-font_data = ExtResource( 1 )
-
-[sub_resource type="Theme" id=7]
-default_font = SubResource( 6 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 28
-font_data = ExtResource( 1 )
-
-[sub_resource type="Theme" id=9]
-default_font = SubResource( 8 )
-
 [sub_resource type="DynamicFont" id=1]
-size = 32
+size = 48
 font_data = ExtResource( 1 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Tutorial0"
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("BlockChooser:position")
 tracks/0/interp = 1
@@ -105,8 +104,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Tutorial1"
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Block3:position")
@@ -169,8 +167,7 @@ tracks/4/keys = {
 "values": [ Vector2( 312, 832 ), Vector2( 320, 960 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Tutorial2"
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Block:position")
 tracks/0/interp = 1
@@ -416,7 +413,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 280.0
 margin_bottom = 62.0
-theme = SubResource( 7 )
+theme = SubResource( 2 )
 text = "How To Play"
 align = 1
 autowrap = true
@@ -434,7 +431,7 @@ margin_left = -40.0
 margin_top = 664.0
 margin_right = 383.0
 margin_bottom = 704.0
-theme = SubResource( 9 )
+theme = SubResource( 4 )
 text = "[ENTER] to continue tutorial."
 __meta__ = {
 "_edit_use_anchors_": false
@@ -446,7 +443,7 @@ margin_left = -40.0
 margin_top = 672.0
 margin_right = 383.0
 margin_bottom = 733.0
-theme = SubResource( 9 )
+theme = SubResource( 4 )
 text = "
 [r] to restart tutorial."
 __meta__ = {
@@ -537,7 +534,7 @@ margin_left = 8.0
 margin_top = 664.0
 margin_right = 280.0
 margin_bottom = 769.0
-theme = SubResource( 2 )
+theme = SubResource( 6 )
 text = "Hover these grey boxes over any blocks by using [W], [A], [S], or [D]"
 autowrap = true
 __meta__ = {
@@ -553,7 +550,7 @@ margin_left = 8.0
 margin_top = 792.0
 margin_right = 280.0
 margin_bottom = 897.0
-theme = SubResource( 2 )
+theme = SubResource( 6 )
 text = "Press [ENTER] and the  two blocks will swap places."
 autowrap = true
 __meta__ = {
@@ -570,7 +567,7 @@ margin_left = -128.0
 margin_top = 16.0
 margin_right = 144.0
 margin_bottom = 121.0
-theme = SubResource( 2 )
+theme = SubResource( 6 )
 text = "Swap blocks to match 3 (or more) blocks of the same color in a line."
 autowrap = true
 __meta__ = {
@@ -588,7 +585,7 @@ margin_left = -128.0
 margin_top = 16.0
 margin_right = 144.0
 margin_bottom = 121.0
-theme = SubResource( 2 )
+theme = SubResource( 6 )
 text = "Press [SPACE] to add a new row from the bottom."
 autowrap = true
 __meta__ = {
@@ -598,9 +595,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.15
-anims/Tutorial0 = SubResource( 3 )
-anims/Tutorial1 = SubResource( 4 )
-anims/Tutorial2 = SubResource( 5 )
+anims/Tutorial0 = SubResource( 7 )
+anims/Tutorial1 = SubResource( 8 )
+anims/Tutorial2 = SubResource( 9 )
 
 [node name="BlockChooser" parent="." instance=ExtResource( 4 )]
 position = Vector2( 128, 824 )

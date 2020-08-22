@@ -3,10 +3,10 @@ extends Node2D
 export(String, FILE, '*tscn') var next_scene_path
 
 var dialog = [
-	"I am Rubak, the smartest inventor of all time.",
-	"This here technology is my best invention yet.",
-	"Except it has a major bug: It tries to kill me.",
-	"Prepare for your bugs to become features, robot!",
+	"I am Maela, I am a physicist.",
+	"Science is simple.",
+	"An apple falls from a tree.",
+	"And you calculate Newton's 2nd law of acceleration.",
 ]
 var dialog_index = 0
 

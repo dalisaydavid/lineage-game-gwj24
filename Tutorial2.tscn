@@ -1,0 +1,389 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://fonts/Hi_Melody/HiMelody-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://sprites/Player/Manny1.png" type="Texture" id=2]
+[ext_resource path="res://Block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://BlockChooser.tscn" type="PackedScene" id=4]
+[ext_resource path="res://code/Tutorial2.gd" type="Script" id=5]
+[ext_resource path="res://sprites/Environment/JanoBG.png" type="Texture" id=6]
+[ext_resource path="res://sprites/Environment/Arrow.png" type="Texture" id=9]
+[ext_resource path="res://sprites/Environment/Alert.png" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 60
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=11]
+default_font = SubResource( 10 )
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlockChooser:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 128, 824 ), Vector2( 128, 960 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Block:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, 960 ), Vector2( 192, 960 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Block2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 192, 960 ), Vector2( 64, 960 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Block3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 576, 832 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Block4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 576, 960 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Block:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 192, 960 ), Vector2( 192, 824 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Block2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, 960 ), Vector2( 64, 824 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Block3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 576, 832 ), Vector2( 576, 696 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Block4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 576, 960 ), Vector2( 576, 824 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Name:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BlockChooser:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="TutorialBG" type="Sprite" parent="."]
+position = Vector2( 320, 512 )
+texture = ExtResource( 6 )
+
+[node name="Title" type="Position2D" parent="."]
+position = Vector2( 152, 26 )
+
+[node name="Label" type="Label" parent="Title"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 280.0
+margin_bottom = 62.0
+theme = SubResource( 2 )
+text = "How To Play"
+align = 1
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartTitle" type="Position2D" parent="."]
+position = Vector2( 208, -576 )
+
+[node name="Label" type="Label" parent="RestartTitle"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -40.0
+margin_top = 664.0
+margin_right = 383.0
+margin_bottom = 704.0
+theme = SubResource( 4 )
+text = "[ENTER] to play!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="RestartTitle"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -40.0
+margin_top = 672.0
+margin_right = 383.0
+margin_bottom = 733.0
+theme = SubResource( 4 )
+text = "
+[r] to restart tutorial."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Alert" type="Sprite" parent="."]
+position = Vector2( 328, 448 )
+texture = ExtResource( 10 )
+
+[node name="Timer" type="Timer" parent="Alert"]
+wait_time = 2.0
+one_shot = true
+
+[node name="StorySprite" type="Sprite" parent="."]
+position = Vector2( 832, 360 )
+texture = ExtResource( 2 )
+
+[node name="Block" parent="." instance=ExtResource( 3 )]
+position = Vector2( 192, 960 )
+use_tutorial_color = true
+
+[node name="Block2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 64, 960 )
+use_tutorial_color = true
+
+[node name="Block3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 576, 832 )
+use_tutorial_color = true
+
+[node name="Block4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 576, 960 )
+use_tutorial_color = true
+
+[node name="Arrow" type="Sprite" parent="."]
+position = Vector2( 720, 104 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 9 )
+
+[node name="Arrow3" type="Sprite" parent="."]
+position = Vector2( 800, 168 )
+rotation = -0.760963
+scale = Vector2( 0.365339, 0.25 )
+texture = ExtResource( 9 )
+
+[node name="Arrow2" type="Sprite" parent="."]
+position = Vector2( 248, 512 )
+rotation = -0.616101
+scale = Vector2( 0.575247, 0.632648 )
+texture = ExtResource( 9 )
+
+[node name="Name" type="Position2D" parent="."]
+position = Vector2( 888, 24 )
+
+[node name="Label" type="Label" parent="Name"]
+margin_left = -128.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 121.0
+theme = SubResource( 6 )
+text = "Manny"
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityExplain" type="Position2D" parent="."]
+position = Vector2( 680, 48 )
+
+[node name="Label" type="Label" parent="AbilityExplain"]
+modulate = Color( 0.419608, 0.521569, 0.854902, 1 )
+margin_left = -128.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 121.0
+theme = SubResource( 11 )
+text = "Family member
+special ability"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="WarningExplain" type="Position2D" parent="."]
+position = Vector2( 152, 528 )
+
+[node name="Label" type="Label" parent="WarningExplain"]
+modulate = Color( 0.870588, 0.341176, 0.341176, 1 )
+margin_left = -128.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 121.0
+theme = SubResource( 11 )
+text = "Ability incoming warning"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityTimerExplain" type="Position2D" parent="."]
+position = Vector2( 787, 160 )
+
+[node name="Label" type="Label" parent="AbilityTimerExplain"]
+modulate = Color( 0.807843, 0.607843, 0.886275, 1 )
+margin_left = -128.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 121.0
+theme = SubResource( 11 )
+text = "Ability timer: Time left
+before ability is used"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Ability" type="Position2D" parent="."]
+position = Vector2( 875, 72 )
+
+[node name="Label" type="Label" parent="Ability"]
+modulate = Color( 0.419608, 0.521569, 0.854902, 1 )
+margin_left = -128.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 121.0
+theme = SubResource( 11 )
+text = "Adds new block"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityTimer" type="Position2D" parent="."]
+position = Vector2( 947, 112 )
+
+[node name="Label" type="Label" parent="AbilityTimer"]
+modulate = Color( 0.807843, 0.607843, 0.886275, 1 )
+margin_left = -128.0
+margin_top = 16.0
+margin_right = 144.0
+margin_bottom = 121.0
+theme = SubResource( 11 )
+text = "10"
+autowrap = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.15
+anims/Tutorial0 = SubResource( 7 )
+anims/Tutorial1 = SubResource( 8 )
+anims/Tutorial2 = SubResource( 9 )
+
+[node name="BlockChooser" parent="." instance=ExtResource( 4 )]
+position = Vector2( 128, 824 )
+[connection signal="timeout" from="Alert/Timer" to="." method="_on_Timer_timeout"]

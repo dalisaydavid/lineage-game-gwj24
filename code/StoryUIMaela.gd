@@ -1,7 +1,7 @@
 extends MarginContainer
 
 signal text_fully_revealed
-var final_text = "Maela story test. Maela story test. Maela story test. Maela story test. Maela story test. Maela story test. Maela story test. Maela story test. Maela story test. Maela story test."
+var final_text = "Dr. Maela Cruz earned her degree in scientific multiverses. She was challenged by her colleagues, saying her work was based on science fiction and timey-wimey nonsense. But she wanted to use physics to travel through time and experience what her ancestors did. Maela had the perfect equation that allowed her to travel through time. She wrote all about it this journal."
 var text_as_tokens = []
 var token_index_bag = []
 var revealed_text_as_tokens = []

@@ -3,17 +3,17 @@ extends Node2D
 export(String, FILE, '*tscn') var next_scene_path
 
 var dialog = [
-	"I am Jano, the smartest inventor of all time.",
-	"This here technology is my best invention yet.",
-	"Except it has a major bug: It tries to kill me.",
-	"Prepare to to become a feature, robot slave!",
+	"Jano Cruz. The best gun slinger in the country...",
+	"I've never lost a single duel, and I don't plan to.",
+	"This here gang is trying to do me dirty, planning an attack from every angle.",
+	"Short on ammo, but I plan to win.",
 ]
 var dialog_index = 0
 
 func _ready():
 	set_process_input(true)
 	unshine()
-	$"/root/AudioPlayer".play("res://music/lapu.wav", false)
+	$"/root/AudioPlayer".play("res://music/jano.wav", false)
 
 func _input(event):
 	if event.is_action_released("choose"):

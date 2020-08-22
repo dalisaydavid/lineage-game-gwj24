@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sprites/Light/light.png" type="Texture" id=1]
 [ext_resource path="res://sprites/Environment/Arrow.png" type="Texture" id=2]
-[ext_resource path="res://sprites/Environment/JanoBG.png" type="Texture" id=3]
+[ext_resource path="res://sprites/Environment/RubakBG.png" type="Texture" id=3]
 [ext_resource path="res://sprites/Environment/Alert.png" type="Texture" id=4]
 [ext_resource path="res://code/Camera2D.gd" type="Script" id=5]
 [ext_resource path="res://BlockChooser.tscn" type="PackedScene" id=6]

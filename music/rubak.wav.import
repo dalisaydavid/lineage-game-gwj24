@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rubak.wav-66df09aa3d4a10aae4a1855821ce8f91.sample"
+
+[deps]
+
+source_file="res://music/rubak.wav"
+dest_files=[ "res://.import/rubak.wav-66df09aa3d4a10aae4a1855821ce8f91.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

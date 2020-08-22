@@ -1,8 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://sprites/Jano/Jano.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Maela/Maela3.png" type="Texture" id=1]
 [ext_resource path="res://fonts/Hi_Melody/HiMelody-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://code/StoryUIMaela.gd" type="Script" id=3]
+[ext_resource path="res://sprites/Maela/Maela4.png" type="Texture" id=4]
+[ext_resource path="res://sprites/Maela/Maela1.png" type="Texture" id=5]
+[ext_resource path="res://sprites/Maela/Maela2.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxLine" id=1]
 thickness = 5
@@ -24,7 +27,7 @@ default_font = SubResource( 4 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -111,6 +114,7 @@ rect_min_size = Vector2( 0, 384 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HBoxContainer/VBoxContainer/OpponentContainer"]
 position = Vector2( 184, 188 )
 frames = SubResource( 6 )
+frame = 1
 playing = true
 
 [node name="StoryContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
